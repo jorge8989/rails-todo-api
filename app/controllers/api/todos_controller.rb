@@ -3,6 +3,11 @@ class Api::TodosController < ApplicationController
     @todos = Todo.all.order(created_at: :asc)
   end
 
+  def show
+    @todo = Todo.find(params[:id])
+    render json: @todo.to_json
+  end
+
   def create
     @todo = Todo.new(todo_params)
     if @todo.save
